@@ -1,0 +1,53 @@
+{
+  "name": "byo-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "npm-run-all clean:*",
+    "clean:docbase": "rimraf docbase",
+    "clean:lib": "rimraf lib",
+    "compile:es6": "mkdirp lib/es6 && babel lib/es6 --out-dir lib/es5",
+    "compile:docbase:html": "mkdirp docbase/ && cpx \"src/html/*.html\" docbase/",
+    "compile:typescript": "tsc --outDir lib/es6 --target ES6",
+    "compile:watch": "npm-run-all --parallel compile:watch:*",
+    "compile:watch:docbase": "npm-run-all --parallel compile:watch:docbase:*",
+    "compile:watch:docbase:html": "npm run compile:docbase:html -- --watch",
+    "compile:watch:es6": "npm run compile:es6 -- --watch",
+    "compile:watch:typescript": "npm run compile:typescript -- --watch",
+    "compile:watch:webpack": "npm run compile:webpack -- --watch",
+    "compile:webpack": "babel-node ./node_modules/.bin/webpack",
+    "start:dev:execute": "nodemon lib/es5/server/server.js",
+    "start:dev": "npm-run-all --parallel compile:watch start:dev:execute"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "1.1.2",
+    "express": "4.16.2",
+    "react": "16.1.0",
+    "react-dom": "16.1.0",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2",
+    "rxjs": "5.5.2",
+    "ws": "3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "8.0.50",
+    "@types/react": "16.0.22",
+    "@types/react-dom": "16.0.3",
+    "babel": "6.23.0",
+    "babel-cli": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-plugin-transform-async-to-generator": "6.24.1",
+    "babel-preset-latest": "6.24.1",
+    "babel-preset-stage-1": "6.24.1",
+    "cpx": "1.5.0",
+    "mkdirp": "0.5.1",
+    "nodemon": "1.12.1",
+    "npm-run-all": "4.1.2",
+    "tsc": "1.20150623.0",
+    "typescript": "2.6.1",
+    "webpack": "3.8.1"
+  }
+}

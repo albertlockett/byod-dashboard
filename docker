@@ -1,0 +1,1 @@
+show-tables exec -it docker-mysql mysql --password=password redportal
